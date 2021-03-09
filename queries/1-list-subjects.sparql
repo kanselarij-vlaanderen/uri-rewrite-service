@@ -1,0 +1,7 @@
+SELECT DISTINCT ?subject
+FROM %GRAPHS
+WHERE {
+    ?subject a %TYPE .
+    FILTER(STRSTARTS(STR(?subject), %URI_BASE) = false)
+}
+LIMIT %LIMIT

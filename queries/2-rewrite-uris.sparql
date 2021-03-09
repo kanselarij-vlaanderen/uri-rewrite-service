@@ -1,0 +1,26 @@
+DELETE {
+    GRAPH ?g {
+        ?old_s ?p ?o .
+        ?is ?ip ?old_s .
+    }
+}
+INSERT {
+    GRAPH ?g {
+        ?new_s ?p ?o .
+        ?is ?ip ?new_s .
+    }
+}
+WHERE {
+    GRAPH ?g {
+        ?old_s ?p ?o ;
+            %SUFFIX_PREDICATE ?suffix .
+        OPTIONAL { ?is ?ip ?old_s . }
+    }
+    BIND(URI(CONCAT(%URI_BASE, STR(?suffix))) AS ?new_s)
+    VALUES ?g {
+        %GRAPHS
+    }
+    VALUES ?old_s {
+        %SUBJECTS
+    }
+}
