@@ -39,6 +39,32 @@ example:
       - my-triplestore-service:database
 ```
 
+## Deployment
+
+Below are some suggested steps for running a uri-rewrite within a mu-semtech stack.
+
+- Bring the stack into a maintenance state
+```
+drc down
+```
+- Start the DB
+```
+drc up -d triplestore
+```
+- Start the migration
+```
+drc up -d uri-rewrite
+```
+- Monitor the migration to make sure all goes well 
+```
+drc logs -f uri-rewrite
+```
+- Wait for the migration to finish and take it down
+```
+drc down
+```
+- Remove the temporary entry in the docker-compose.override file
+
 ## Limitations
 
 - The scope of the rewrite is limited to URI's in the **"subject"- or "object"-part** of a certain triple. URI's in the **"predicate"-part won't be affected**.
